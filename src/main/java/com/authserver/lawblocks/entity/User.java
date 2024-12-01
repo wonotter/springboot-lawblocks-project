@@ -33,11 +33,11 @@ public class User {
     @Column(name = "nickname", nullable = false)
     private String nickname;
 
-    @Column(name = "real_name", nullable = false)
-    private String realName;
+    //@Column(name = "real_name", nullable = false)
+    //private String realName;
 
-    @Column(name = "birth", nullable = false)
-    private String birth;
+    //@Column(name = "birth", nullable = false)
+    //private String birth;
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -50,8 +50,8 @@ public class User {
         this.password = password;
         this.email = email;
         this.nickname = nickname;
-        this.realName = realName;
-        this.birth = birth;
+        //this.realName = realName;
+        //this.birth = birth;
         this.certification = certification;
     }
 }

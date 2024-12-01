@@ -18,11 +18,11 @@ public record SignUpRequestDto (
     @NotBlank(message = "닉네임은 필수 입력 값입니다.")
     String nickName,
 
-    @NotBlank(message = "생년월일은 필수 입력 값입니다.")
-    String birth,
+    //@NotBlank(message = "생년월일은 필수 입력 값입니다.")
+    //String birth,
 
-    @NotBlank(message = "이름은 필수 입력 값입니다.")
-    String realName,
+    //@NotBlank(message = "이름은 필수 입력 값입니다.")
+    //String realName,
 
     @NotBlank(message = "이메일 인증코드는 필수 입력입니다.")
     String certificationNumber

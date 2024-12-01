@@ -25,9 +25,9 @@ public class PostController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Void> registerPost(@RequestBody @Valid PostBoardRequestDto dto) {
-        boardService.registerPost(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<Long> registerPost(@RequestBody @Valid PostBoardRequestDto dto) {
+        Long postId = boardService.registerPost(dto);
+        return ResponseEntity.ok(postId);
     }
 
     @DeleteMapping("/{post_id}")

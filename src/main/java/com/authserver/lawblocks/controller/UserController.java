@@ -24,9 +24,9 @@ public class UserController {
     }
 
     @PostMapping("/signIn")
-    public ResponseEntity<Void> signIn(@RequestBody @Valid LoginRequestDto requestBody) {
-        authService.signIn(requestBody);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<LoginResponseDto> signIn(@RequestBody @Valid LoginRequestDto requestBody) {
+        LoginResponseDto response = authService.signIn(requestBody);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/emailCertification")

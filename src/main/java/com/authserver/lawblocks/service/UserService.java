@@ -40,10 +40,10 @@ public class UserService {
 
         Certification certification = certificationRepository.findFirstByEmailOrderByCreatedDateDesc(dto.email()).orElseThrow(() -> new BadRequestException(ErrorCode.CERTIFICATION_FAIL));
 
-        log.info("certification: {}", certification.getEmail());
-        log.info("dto: {}", dto.email());
-        log.info("certificationNumber: {}", certification.getVerificationCode());
-        log.info("dto: {}", dto.certificationNumber());
+//        log.info("certification: {}", certification.getEmail());
+//        log.info("dto: {}", dto.email());
+//        log.info("certificationNumber: {}", certification.getVerificationCode());
+//        log.info("dto: {}", dto.certificationNumber());
         boolean isMatched = certification.getEmail().equals(dto.email())
                 && certification.getVerificationCode().getCode().equals(dto.certificationNumber());
         if (!isMatched) throw new BadRequestException(ErrorCode.CERTIFICATION_MISSMATCHING);
@@ -53,8 +53,8 @@ public class UserService {
                 .password(encodePassword)
                 .email(dto.email())
                 .nickname(dto.nickName())
-                .realName(dto.realName())
-                .birth(dto.birth())
+                //.realName(dto.realName())
+                //.birth(dto.birth())
                 .build();
 
         userRepository.save(user);
@@ -62,7 +62,7 @@ public class UserService {
     }
 
     @Transactional
-    public void signIn(LoginRequestDto dto) {
+    public LoginResponseDto signIn(LoginRequestDto dto) {
         String userId = dto.userId();
         User user = userRepository.findByUserId(userId).orElseThrow(() -> new BadRequestException(ErrorCode.USER_NOT_FOUND));
 
@@ -72,6 +72,9 @@ public class UserService {
 
         if (!isMatched)
             throw new BadRequestException(ErrorCode.PASSWORD_NOT_MATCH);
+
+        // 로그인 성공 시, userId와 nickname을 반환
+        return new LoginResponseDto(user.getUserId(), user.getNickname());
     }
 
     @Transactional
@@ -96,10 +99,10 @@ public class UserService {
     private void sendMail(Certification certification) {
         mailClient.sendMail(mail -> {
             mail.setTo(certification.getEmail());
-            mail.setSubject("[Law-Blocks] 이메일 인증 코드");
+            mail.setSubject("[LAWBlOCKS] 이메일 인증 코드");
             mail.setText("""
-                Law-Blocks 이메일 인증 코드입니다.
-                Code는 다음과 같습니다.
+                LAWBLOCKS 이메일 인증 코드입니다.
+                코드는 다음과 같습니다.
                 %s
                 """.formatted(certification.getVerificationCode().getCode()));
         });

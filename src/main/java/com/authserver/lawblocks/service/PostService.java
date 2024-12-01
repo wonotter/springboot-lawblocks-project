@@ -30,15 +30,19 @@ public class PostService {
     }
 
     @Transactional
-    public void registerPost(PostBoardRequestDto dto) {
+    public Long registerPost(PostBoardRequestDto dto) {
         User user = userRepository.findByNickname(dto.nickname()).orElseThrow(() -> new BadRequestException(ErrorCode.NOT_EXISTED_USER));
 
         Post post = Post.builder()
                 .title(dto.title())
-                .contents(dto.content())
+                .contents(dto.contents())
                 .user(user)
                 .build();
-        postRepository.save(post);
+
+        Post savedPost = postRepository.save(post);
+        
+        // 저장된 Post의 ID 반환
+        return savedPost.getId();
     }
 
     @Transactional
