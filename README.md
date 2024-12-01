@@ -11,8 +11,10 @@
 
 ### 2. 서버를 실행하기 위해 추가로 필요한 파일(패키지) 목록
 - IntelliJ 내부 터미널을 열어 아래 명령을 입력하여 Docker를 활성화한다.
-  (만약 도커가 없을 경우 플러그인 설치 필요)
+
+   (만약 도커가 없을 경우 플러그인 설치 필요)
     - docker-compose up -d
 
-- src/main/resources/security 안에 application-db.yml, application-mail.yml 파일은 보안 이슈로 push하지 않음
-  (해당 파일은 담당 개발자인 Wonho Kim에게 문의)
+- src/main/resources/security 안에 application-db.yml, application-mail.yml 파일은 보안 문제로 push하지 않음
+  
+   (해당 파일은 담당 개발자인 Wonho Kim에게 문의)
