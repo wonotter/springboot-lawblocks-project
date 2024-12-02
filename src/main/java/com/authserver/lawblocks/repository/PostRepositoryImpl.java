@@ -41,6 +41,7 @@ public class PostRepositoryImpl implements QuerydslPostRepository {
     public List<PostDto> selectLatestBoardList(LocalDateTime beforeWeek) {
         return queryFactory
                 .select(Projections.constructor(PostDto.class,
+                        post.id,
                         post.title,
                         post.contents,
                         post.user.nickname
@@ -56,6 +57,7 @@ public class PostRepositoryImpl implements QuerydslPostRepository {
     public List<PostDto> selectSearchBoardList(String searchWord) {
         return queryFactory
                 .select(Projections.constructor(PostDto.class,
+                        post.id,
                         post.title,
                         post.contents,
                         post.user.nickname
@@ -75,6 +77,7 @@ public class PostRepositoryImpl implements QuerydslPostRepository {
     public List<PostDto> selectUserBoardList(String nickname) {
         return queryFactory
                 .select(Projections.constructor(PostDto.class,
+                        post.id,
                         post.title,
                         post.contents,
                         post.user.nickname

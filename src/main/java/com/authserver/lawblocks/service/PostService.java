@@ -26,7 +26,7 @@ public class PostService {
     public PostDto getPost(Long postId) {
         Post post = postRepository.getBoard(postId).orElseThrow(() -> new BadRequestException(ErrorCode.NOT_EXISTED_POST));
 
-        return new PostDto(post.getTitle(), post.getContents(), post.getUser().getNickname());
+        return new PostDto(post.getId(), post.getTitle(), post.getContents(), post.getUser().getNickname());
     }
 
     @Transactional

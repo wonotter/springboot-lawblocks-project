@@ -20,7 +20,7 @@ public class Post extends BaseEntity {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "contents", nullable = false)
+    @Column(name = "contents", columnDefinition = "TEXT", nullable = false)
     private String contents;
 
     @ManyToOne(fetch = FetchType.LAZY)
