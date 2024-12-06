@@ -27,10 +27,15 @@ public class Post extends BaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
     @Builder
-    public Post(String title, String contents, User user) {
+    public Post(String title, String contents, User user, Category category) {
         this.title = title;
         this.contents = contents;
         this.user = user;
+        this.category = category;
     }
 }

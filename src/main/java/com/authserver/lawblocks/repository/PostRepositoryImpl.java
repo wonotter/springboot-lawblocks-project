@@ -1,6 +1,7 @@
 package com.authserver.lawblocks.repository;
 
 import com.authserver.lawblocks.entity.Post;
+import com.authserver.lawblocks.repository.query.CategoryPostDto;
 import com.authserver.lawblocks.repository.query.PostDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -44,7 +45,9 @@ public class PostRepositoryImpl implements QuerydslPostRepository {
                         post.id,
                         post.title,
                         post.contents,
-                        post.user.nickname
+                        post.user.nickname,
+                        post.category.id,
+                        post.category.name
                 ))
                 .from(post)
                 .join(post.user, user)
@@ -60,7 +63,9 @@ public class PostRepositoryImpl implements QuerydslPostRepository {
                         post.id,
                         post.title,
                         post.contents,
-                        post.user.nickname
+                        post.user.nickname,
+                        post.category.id,
+                        post.category.name
                 ))
                 .from(post)
                 .join(post.user, user)
@@ -80,11 +85,31 @@ public class PostRepositoryImpl implements QuerydslPostRepository {
                         post.id,
                         post.title,
                         post.contents,
-                        post.user.nickname
+                        post.user.nickname,
+                        post.category.id,
+                        post.category.name
                 ))
                 .from(post)
                 .join(post.user, user)
                 .where(post.user.nickname.eq(nickname))
+                .orderBy(post.updatedDate.desc())
+                .fetch();
+    }
+
+    @Override
+    public List<CategoryPostDto> selectCategoryList(Long category_id) {
+        return queryFactory
+                .select(Projections.constructor(CategoryPostDto.class,
+                        post.id,
+                        post.title,
+                        post.contents,
+                        post.user.nickname,
+                        post.category.id,
+                        post.category.name
+                ))
+                .from(post)
+                .join(post.category)
+                .where(category_id != null ? post.category.id.eq(category_id) : post.category.id.isNull())
                 .orderBy(post.updatedDate.desc())
                 .fetch();
     }

@@ -14,7 +14,8 @@ public enum ErrorCode {
     VALIDATION_FAIL(BAD_REQUEST, "E008", "검증에 실패하였습니다."),
     EMAIL_DUPLICATED(BAD_REQUEST, "E009", "중복된 이메일입니다."),
     CERTIFICATION_FAIL(BAD_REQUEST, "E010", "이메일 인증에 실패하였습니다."),
-    CERTIFICATION_MISSMATCHING(BAD_REQUEST, "E011", "인증코드가 일치하지 않습니다.")
+    CERTIFICATION_MISSMATCHING(BAD_REQUEST, "E011", "인증코드가 일치하지 않습니다."),
+    NOT_EXISTED_CATEGORY(BAD_REQUEST, "E012", "카테고리가 존재하지 않습니다.")
     ;
     private HttpStatus status;
     private final String code;

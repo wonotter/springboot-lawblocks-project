@@ -4,5 +4,8 @@ public record PostDto(
     Long post_id,
     String title,
     String contents,
-    String nickname) {
+    String nickname,
+    Long category_id,
+    String categoryName
+) {
 }

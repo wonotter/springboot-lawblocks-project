@@ -1,6 +1,8 @@
 package com.authserver.lawblocks.controller;
 
+import com.authserver.lawblocks.dto.CategoryId;
 import com.authserver.lawblocks.dto.PostBoardRequestDto;
+import com.authserver.lawblocks.repository.query.CategoryPostDto;
 import com.authserver.lawblocks.repository.query.PostDto;
 import com.authserver.lawblocks.service.PostService;
 import jakarta.validation.Valid;
@@ -52,5 +54,17 @@ public class PostController {
     public ResponseEntity<List<PostDto>> getUserBoardList(@PathVariable("nickname") String nickname) {
         List<PostDto> userBoardList = boardService.getUserBoardList(nickname);
         return ResponseEntity.status(HttpStatus.OK).body(userBoardList);
+    }
+
+    @PostMapping("/categoryId/register")
+    public ResponseEntity<Void> registerCategory(@RequestBody String categoryName) {
+        boardService.registerCategory(categoryName);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/categoryId/list")
+    public ResponseEntity<List<CategoryPostDto>> getCategoryList(@RequestBody CategoryId categoryId) {
+        List<CategoryPostDto> categoryList = boardService.getCategoryList(categoryId.id());
+        return ResponseEntity.ok().body(categoryList);
     }
 }

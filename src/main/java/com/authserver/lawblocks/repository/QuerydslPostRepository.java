@@ -1,6 +1,7 @@
 package com.authserver.lawblocks.repository;
 
 import com.authserver.lawblocks.entity.Post;
+import com.authserver.lawblocks.repository.query.CategoryPostDto;
 import com.authserver.lawblocks.repository.query.PostDto;
 import org.springframework.data.repository.query.Param;
 
@@ -14,4 +15,5 @@ public interface QuerydslPostRepository {
     List<PostDto> selectLatestBoardList(@Param("beforeWeek") LocalDateTime beforeWeek);
     List<PostDto> selectSearchBoardList(@Param("searchWord") String searchWord);
     List<PostDto> selectUserBoardList(@Param("nickname") String nickname);
+    List<CategoryPostDto> selectCategoryList(Long category_id);
 }
