@@ -57,7 +57,7 @@ public class PostController {
     }
 
     @PostMapping("/categoryId/register")
-    public ResponseEntity<Void> registerCategory(@RequestBody String categoryName) {
+    public ResponseEntity<Void> registerCategory(@RequestParam String categoryName) {
         boardService.registerCategory(categoryName);
         return ResponseEntity.ok().build();
     }
